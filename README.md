@@ -23,7 +23,7 @@ import com.ibm.storage.storagemanager.interfaces.KeyValue;
 ~~~
 where numObjects is the maximum number of objects which can be stored in the cache.  
 
-In order to use an implementation of the key-value interface in which a Redis [Redis] cache is used, a Redis cache needs to be running in a separate process.  The following can then be used:
+In order to use an implementation of the key-value interface in which a Redis cache is used, a Redis cache needs to be running in a separate process.  The following can then be used:
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.redis.KeyValueRedis;
 import com.ibm.storage.storagemanager.interfaces.KeyValue;
@@ -31,7 +31,7 @@ import com.ibm.storage.storagemanager.interfaces.KeyValue;
 ~~~
 In this example, the cache is running on the same node as the application program, 6379 is the port number, and 60 indicates that idle connections should be closed after 60 seconds.
 
-In order to use an implementation of the key-value interface in which a MySQL [MySQL] database is used,
+In order to use an implementation of the key-value interface in which a MySQL database is used,
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.sql.KeyValueSQL;
 import com.ibm.storage.storagemanager.interfaces.KeyValue;
@@ -58,7 +58,7 @@ In order to pass parameters directly to the KeyValueSQL constructor and avoid us
             boolean clearAll);
 ~~~
 	
-In order to use an implementation of the KeyValue interface in which Cloudant [Cloudant] is used,
+In order to use an implementation of the KeyValue interface in which Cloudant is used,
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.cloudant.KeyValueCloudant;
 import com.ibm.storage.storagemanager.interfaces.KeyValue;
@@ -85,7 +85,7 @@ In order to pass parameters directly to the KeyValueCloudant constructor and avo
             boolean deletePreviousDb)
 ~~~
 
-In order to use an implementation of the KeyValue interface in which OpenStack Object Storage [OpenStack] is used,
+In order to use an implementation of the KeyValue interface in which OpenStack Object Storage is used,
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.objectstorage.KeyValueObjectStorage;
 import com.ibm.storage.storagemanager.interfaces.KeyValue;
