@@ -23,7 +23,7 @@ import com.ibm.storage.storagemanager.interfaces.KeyValue;
 ~~~
 where numObjects is the maximum number of objects which can be stored in the cache.  
 
-	In order to use an implementation of the key-value interface in which a Redis [Redis] cache is used, a Redis cache needs to be running in a separate process.  The following can then be used:
+In order to use an implementation of the key-value interface in which a Redis [Redis] cache is used, a Redis cache needs to be running in a separate process.  The following can then be used:
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.redis.KeyValueRedis;
 import com.ibm.storage.storagemanager.interfaces.KeyValue;
@@ -31,14 +31,14 @@ import com.ibm.storage.storagemanager.interfaces.KeyValue;
 ~~~
 In this example, the cache is running on the same node as the application program, 6379 is the port number, and 60 indicates that idle connections should be closed after 60 seconds.
 
-	In order to use an implementation of the key-value interface in which a MySQL [MySQL] database is used,
+In order to use an implementation of the key-value interface in which a MySQL [MySQL] database is used,
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.sql.KeyValueSQL;
 import com.ibm.storage.storagemanager.interfaces.KeyValue;
     KeyValue<String, Integer> datastore = new KeyValueSQL<String, Integer>("db1", CONFIG_FILE, true);
 ~~~
 In this example, “db1” is the name of the database for storing the key-value data, CONFIG_FILE is a configuration text file, and true indicates that all previous values stored in the database should be deleted.  A skeleton for the configuration file is in the gitub repository file config/sql.config.  The first line is the name of the sql database for storing the data.  The second line is the url for accessing the database.  The third line is the user id, and the fourth line is the password.
-	In order to pass parameters directly to the KeyValueSQL constructor and avoid using a configuration file, the following constructor can be invoked:
+In order to pass parameters directly to the KeyValueSQL constructor and avoid using a configuration file, the following constructor can be invoked:
 ~~~ java
     /**
      * Constructor. Establishes a session with a Key-value store..
@@ -58,14 +58,14 @@ In this example, “db1” is the name of the database for storing the key-value
             boolean clearAll);
 ~~~
 	
-	In order to use an implementation of the KeyValue interface in which Cloudant [Cloudant] is used,
+In order to use an implementation of the KeyValue interface in which Cloudant [Cloudant] is used,
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.cloudant.KeyValueCloudant;
 import com.ibm.storage.storagemanager.interfaces.KeyValue;
     KeyValue<String, Integer> datastore = new KeyValueCloudant<String, Integer>("db1", CONFIG_FILE, true);
 ~~~
 In this example, “db1” is the name of the database for storing the key-value data, CONFIG_FILE is a configuration text file, and true indicates that all previous values stored in the database should be deleted.  A skeleton for the configuration file is in the gitub repository file config/cloudant.config.  The first line is the url for the Cloudant account.  The second line is the user id, and the third line is the password.
-	In order to pass parameters directly to the KeyValueCloudant constructor and avoid using a configuration file, the following constructor can be invoked:
+In order to pass parameters directly to the KeyValueCloudant constructor and avoid using a configuration file, the following constructor can be invoked:
 ~~~ java
     /**
      * Constructor. Establishes a session with a Key-value store.
@@ -85,7 +85,7 @@ In this example, “db1” is the name of the database for storing the key-value
             boolean deletePreviousDb)
 ~~~
 
-	In order to use an implementation of the KeyValue interface in which OpenStack Object Storage [OpenStack] is used,
+In order to use an implementation of the KeyValue interface in which OpenStack Object Storage [OpenStack] is used,
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.objectstorage.KeyValueObjectStorage;
 import com.ibm.storage.storagemanager.interfaces.KeyValue;
@@ -93,7 +93,7 @@ import com.ibm.storage.storagemanager.interfaces.KeyValue;
 ~~~
 
 In this example, “db1” is the name of the database (container) for storing the key-value data, CONFIG_FILE is a configuration text file, and true indicates that all previous values stored in the database should be deleted.  A skeleton for the configuration file is in the gitub repository file config/objectstorage.config.  The first line is the url for accessing Object Storage.  The second line is the user id, and the third line is the password.
-	In order to pass parameters directly to the KeyValueObjectStorage constructor and avoid using a configuration file, the following constructor can be invoked:
+In order to pass parameters directly to the KeyValueObjectStorage constructor and avoid using a configuration file, the following constructor can be invoked:
 ~~~ java
      /**
       * Constructor. Establishes a session with a Key-value store.
