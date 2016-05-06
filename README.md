@@ -114,19 +114,19 @@ In order to pass parameters directly to the KeyValueObjectStorage constructor an
 
 The same KeyValue methods are used for each implementation of datastore.  This makes it easy to substitute different implementations of data stores within an application program.  We next show examples of using datastore.  Note that the same method calls could be used with KeyValueCloudant, KeyValueFile, KeyValueGuava, KeyValueRedis, KeyValueSQL, KeyValueObjectStorage, and any other classes which implement the KeyValue interface.
 
-The following method call adds 42 to the data store indexed by key1:
+The following method call adds 42 to the data store indexed by "key1":
 ~~~ java
     datastore.put(key1, 42);
 ~~~
-The following method call adds all key-value pairs corresponding to map to the data store and returns the number of key-value pairs successfully stored:
+The following method call adds all key-value pairs corresponding to "map" to the data store and returns the number of key-value pairs successfully stored:
 ~~~ java
     int numStored = datastore.putAll(map);
 ~~~
-The following method call returns the value corresponding to key.  It returns null if key is not found in the data store.
+The following method call returns the value corresponding to "key".  It returns null if "key" is not found in the data store.
 ~~~ java
     val = datastore.get(key);
 ~~~
-In the following method call, list is a list of keys.  getAll looks up all key-value pairs corresponding to keys in list and returns a map containing them.  In this example, keys are strings, and values are integers.
+In the following method call, "list" is a list of keys.  getAll looks up all key-value pairs corresponding to keys in "list" and returns a map containing them.  In this example, keys are strings, and values are integers.
 ~~~ java
     Map<String, Integer> map = datastore.getAll(list);
 ~~~
