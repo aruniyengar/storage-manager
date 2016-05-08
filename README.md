@@ -164,14 +164,14 @@ The following displays the contents of the entire data store.  It should not be 
     System.out.println(datastore.toString());
 ~~~
 ###Monitoring Data Store Performance
-The following creates an object which is used to monitor data stores; datastore is of type KeyValue (which includes any implementation of the KeyValue interface):
+The following creates an object which is used to monitor data stores; "datastore" is of type KeyValue (which includes any implementation of the KeyValue interface):
 ~~~ java
     MonitoredKeyValue<String, Integer> monitoredStore = new MonitoredKeyValue<String, Integer>(datastore, 10);
 ~~~
-where 10 is the number of most recent data points to keep around for each transaction type.  The MonitoredKeyValue class implements an interface which extends the KeyValue interface.  Thus, the same methods used for the KeyValue interface, such as put and get described earlier, can also be applied to monitoredStore.  The key point is that when this is done, monitoredStore records performance statistics on the latency for executing those methods.  The methods for accessing, setting, and clearing all of the performance stats are defined in:
+where 10 is the number of most recent data points to keep around for each transaction type.  The MonitoredKeyValue class implements an interface which extends the KeyValue interface.  Thus, the same methods used for the KeyValue interface, such as put and get described earlier, can also be applied to monitoredStore.  The key point is that when this is done, "monitoredStore" records performance statistics on the latency for executing those methods.  The methods for accessing, setting, and clearing all of the performance stats are defined in:
 https://github.com/aruniyengar/storage-manager/blob/master/src/main/java/com/ibm/storage/storagemanager/interfaces/KeyValueMonitored.java
 
-After monitoredStore has been used for accessing a data store, the performance statistics from the data store can be obtained via:
+After "monitoredStore" has been used for accessing a data store, the performance statistics from the data store can be obtained via:
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.monitor.RequestStats;
 import com.ibm.storage.storagemanager.implementations.monitor.StorageStats;
@@ -192,7 +192,7 @@ import com.ibm.storage.storagemanager.implementations.monitor.StorageStats;
 ~~~
 
 ###Determining Data Store Performance with a Workload Generator
-The UDSM also includes a workload generator which is used to measure and compare the performance of different data stores.  The performance of different data stores can be compared using the specified workload.  The following can be used to determine the performance of datastor:
+The UDSM also includes a workload generator which is used to measure and compare the performance of different data stores.  The performance of different data stores can be compared using the specified workload.  The following can be used to determine the performance of "datastore":
 ~~~ java
 import com.ibm.storage.storagemanager.performancetester.PerformanceTester;
         PerformanceTester pt = new PerformanceTester(configFile);
