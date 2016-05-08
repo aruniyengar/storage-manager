@@ -116,6 +116,8 @@ In order to pass parameters directly to the KeyValueObjectStorage constructor an
 
 The same KeyValue methods are used for each implementation of datastore.  This makes it easy to substitute different implementations of data stores within an application program.  We next show examples of using datastore.  Note that the same method calls could be used with KeyValueCloudant, KeyValueFile, KeyValueGuava, KeyValueRedis, KeyValueSQL, KeyValueObjectStorage, and any other classes which implement the KeyValue interface.
 
+###Methods to Access Data Stores
+
 The following method call adds 42 to the data store indexed by "key1":
 ~~~ java
     datastore.put(key1, 42);
