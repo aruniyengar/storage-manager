@@ -7,6 +7,8 @@ An overview of this storage client library is available from:
 * Arun Iyengar, [Infrastructure Components for Efficient Data Management](http://domino.watson.ibm.com/library/CyberDig.nsf/papers/71C046EA5608285085257F9500647961/$File/rc25599.pdf), IBM Research Report RC25599 (WAT1604-013), April 7, 2016.
 
 ## Getting Started
+
+###Constructing Objects to Acccess Data Stores
 A common key-value interface is defined in com.ibm.storage.storagemanager.interfaces.KeyValue<K, V>.  This interface is implemented by multiple data stores.  That way, an application program which uses this interface can easily switch between different data store implementations.  In order to use a file system implementation of the key-value interface, the following can be used:
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.file.KeyValueFile;
