@@ -163,3 +163,62 @@ The following displays the contents of the entire data store.  It should not be 
 ~~~ java
     System.out.println(datastore.toString());
 ~~~
+###Monitoring Data Store Performance
+The following creates an object which is used to monitor data stores; datastore is of type KeyValue (which includes any implementation of the KeyValue interface):
+~~~ java
+    MonitoredKeyValue<String, Integer> monitoredStore = new MonitoredKeyValue<String, Integer>(datastore, 10);
+~~~
+where 10 is the number of most recent data points to keep around for each transaction type.  The MonitoredKeyValue class implements an interface which extends the KeyValue interface.  Thus, the same methods used for the KeyValue interface, such as put and get described earlier, can also be applied to monitoredStore.  The key point is that when this is done, monitoredStore records performance statistics on the latency for executing those methods.  The methods for accessing, setting, and clearing all of the performance stats are defined in:
+https://github.com/aruniyengar/storage-manager/blob/master/src/main/java/com/ibm/storage/storagemanager/interfaces/KeyValueMonitored.java
+
+After monitoredStore has been used for accessing a data store, the performance statistics from the data store can be obtained via:
+~~~ java
+import com.ibm.storage.storagemanager.implementations.monitor.RequestStats;
+import com.ibm.storage.storagemanager.implementations.monitor.StorageStats;
+        StorageStats stats = monitoredStore.getStorageStats();
+        System.out.println(stats.allStats());
+        System.out.println("Total number of requests: " + stats.getNumRequests());
+        System.out.println("Total time spent on storage: " + stats.getTotalRequestTime());
+        System.out.println("Start time: " + stats.getStartTime());
+        System.out.println("End time: " + stats.getEndTime());
+        stats.setEndTimeNow();
+        System.out.println("New End time: " + stats.getEndTime());
+        System.out.println("Store type: " + stats.getStoreType());
+        RequestStats stats2 = stats.getRequestData(RequestType.PUT);
+        System.out.println("Statistics for request type: " + stats2.getRequestType());
+        System.out.println("Number of requests: " + stats2.getNumRequests());
+        System.out.println("Time taken by requests: " + stats2.getTotalRequestTime());
+        System.out.println("Recent request times: " + Arrays.toString(stats2.getRecentRequestTimes()));
+~~~
+
+###Determining Data Store Performance with a Workload Generator
+The UDSM also includes a workload generator which is used to measure and compare the performance of different data stores.  The performance of different data stores can be compared using the specified workload.  The following can be used to determine the performance of datastor:
+~~~ java
+import com.ibm.storage.storagemanager.performancetester.PerformanceTester;
+        PerformanceTester pt = new PerformanceTester(configFile);
+        pt.testDataStore(datastore);  // datastore is of type KeyValue<String, byte[]>
+~~~
+configFile is a string indicating the configuration file specifying the directory for the output files and the parameters for the workload generator.  A skeleton for the configuration file is contained in:
+https://github.com/aruniyengar/storage-manager/blob/master/config/performancetest.config
+The workload generator outputs performance data in text files which can be visualized using tools such as gnuplot, Excel, and MATLAB.
+
+In order to run the workload generator on multiple data stores using a single method call, the following static method from com.ibm.storage.storagemanager.performancetester.PerformanceTester can be used:
+~~~ java
+    /**
+     * Run all tests, store the results in output files.
+     * 
+     * @param configFile
+     *            file storing configuration parameters
+     * @param dataStores
+     *            Array containing all data stores to test
+     */
+    public static void runAllTests(String configFile, ArrayList<KeyValue<String, byte[]>> dataStores);
+~~~
+
+There is a JUnit test to easily run performance tests across all data stores currently supported.  This JUnit test is performed by the method:
+~~~ java
+    public void allTests();
+~~~
+in the Java class:
+https://github.com/aruniyengar/storage-manager/blob/master/src/test/java/com/ibm/storage/storagemanager/performancetester/tests/PerformanceTests.java
+ 
