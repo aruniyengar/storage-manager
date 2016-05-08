@@ -223,7 +223,7 @@ in the Java class:
 https://github.com/aruniyengar/storage-manager/blob/master/src/test/java/com/ibm/storage/storagemanager/performancetester/tests/PerformanceTests.java
 
 ###Going Beyond the Generic Key-Value Interface: Using Individual Features of a Specific Data Store
-When Redis is being used, it may be desirable to use features of Redis which go beyond the methods offered by the KeyValue interface.  The following KeyValueRedis method returns a data structure corresponding to the Jedis interface for Redis [Jedis] which allows application programs to access the cache using Jedis methods:
+When Redis is being used, it may be desirable to use features of Redis which go beyond the methods offered by the KeyValue interface.  The following KeyValueRedis method returns a data structure corresponding to the Jedis interface for Redis which allows application programs to access the cache using Jedis methods:
 ~~~ java
     /**
      * Return underlying Jedis object for applications to explicitly use.
@@ -256,7 +256,7 @@ When Cloudant is being used, it may be desirable to access Cloudant in ways whic
     public Database getDatabase();
 ~~~
 
-When Object Storage is being used, it may be desirable to access Object Storage in ways which go beyond the methods offered by the KeyValue interface.  The Java library for OpenStack Storage (JOSS) [Javaswift] provides a convenient Java interface for using Object Storage. The following KeyValueObjectStorage method returns a Container object which allows application programs to access the data store using JOSS:
+When Object Storage is being used, it may be desirable to access Object Storage in ways which go beyond the methods offered by the KeyValue interface.  The Java library for OpenStack Storage (JOSS) provides a convenient Java interface for using Object Storage. The following KeyValueObjectStorage method returns a Container object which allows application programs to access the data store using JOSS:
 ~~~ java
      /**
       * Return underlying container for applications to explicitly use.
