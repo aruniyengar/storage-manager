@@ -266,3 +266,21 @@ When Object Storage is being used, it may be desirable to access Object Storage 
       * */
      public Container getDatabase();
 ~~~
+
+###Encryption and Decryption
+In order to use encryption and decryption, the following class should be imported:
+~~~ java
+import com.ibm.storage.storagemanager.util.Encryption;
+
+The following method call generates an encryption key for encrypting data: 
+~~~ java
+    Encryption.Key secretKey = Encryption.generateKey();
+
+The following method call encrypts hm using encryption key "secretKey": 
+~~~ java
+    SealedObject so = Encryption.encrypt(hm, secretKey);
+
+The following method call decrypts so using encryption key "secretKey":
+~~~ java
+    HashMap<String, Integer> hm2 = Encryption.decrypt(so, secretKey);
+~~~
