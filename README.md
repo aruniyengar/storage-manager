@@ -278,12 +278,12 @@ The following method call generates an encryption key for encrypting data:
     Encryption.Key secretKey = Encryption.generateKey();
 ~~~
 
-The following method call encrypts hm using encryption key "secretKey": 
+The following method call encrypts "hm" using encryption key "secretKey": 
 ~~~ java
     SealedObject so = Encryption.encrypt(hm, secretKey);
 ~~~
 
-The following method call decrypts so using encryption key "secretKey":
+The following method call decrypts "so" using encryption key "secretKey":
 ~~~ java
     HashMap<String, Integer> hm2 = Encryption.decrypt(so, secretKey);
 ~~~
