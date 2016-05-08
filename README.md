@@ -131,11 +131,11 @@ In the following method call, "list" is a list of keys.  getAll looks up all key
     Map<String, Integer> map = datastore.getAll(list);
 ~~~
 
-The following method call deletes the key-value pair corresponding to key2 from the data store if present: 
+The following method call deletes the key-value pair corresponding to "key2" from the data store if present: 
 ~~~ java
     datastore.delete(key2);
 ~~~
-In the following method call, list is a list of keys.  deleteAll deletes all key-value pairs corresponding to a key in list.  The number of deleted key-value pairs is returned:
+In the following method call, "list" is a list of keys.  deleteAll deletes all key-value pairs corresponding to a key in "list".  The number of deleted key-value pairs is returned:
 ~~~ java
     numDeleted = datastore.deleteAll(list);
 ~~~
@@ -145,7 +145,7 @@ The following method call deletes all objects in the data store:
     datastore.clear();
 ~~~
 
-The following method call outputs a string identifying the type of data store represented by datastore:
+The following method call outputs a string identifying the type of data store represented by "datastore":
 ~~~ java
     datastore.storeType();
 ~~~
