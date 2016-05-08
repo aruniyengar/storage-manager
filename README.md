@@ -221,7 +221,8 @@ There is a JUnit test to easily run performance tests across all data stores cur
 ~~~
 in the Java class:
 https://github.com/aruniyengar/storage-manager/blob/master/src/test/java/com/ibm/storage/storagemanager/performancetester/tests/PerformanceTests.java
- ###Going Beyond the Generic Key-Value Interface: Using Individual Features of a Specific Data Store
+
+###Going Beyond the Generic Key-Value Interface: Using Individual Features of a Specific Data Store
 When Redis is being used, it may be desirable to use features of Redis which go beyond the methods offered by the KeyValue interface.  The following KeyValueRedis method returns a data structure corresponding to the Jedis interface for Redis [Jedis] which allows application programs to access the cache using Jedis methods:
 ~~~ java
     /**
