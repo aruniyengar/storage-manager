@@ -4,7 +4,7 @@ Gives Java applications enhanced options for storing data.  Multiple options are
 Caching is provided to improve performance.  Encryption is provided to preserve data confidentiality.  Compression is provided to reduce data sizes.
 
 An overview of this storage client library is available from:
-* Arun Iyengar, [Infrastructure Components for Efficient Data Management](http://domino.watson.ibm.com/library/CyberDig.nsf/papers/71C046EA5608285085257F9500647961/$File/rc25599.pdf), IBM Research Report RC25599 (WAT1604-013), April 7, 2016.
+* Arun Iyengar, [Universal Data Store Manager](http://domino.watson.ibm.com/library/CyberDig.nsf/papers/B2A148A0AFA32F4E85257FB900494E90/$File/rc25607.pdf), IBM Research Report RC25607 (WAT1605-030), May 11, 2016.
 
 ## Getting Started
 
