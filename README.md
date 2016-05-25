@@ -287,3 +287,19 @@ The following method call decrypts "so" using encryption key "secretKey":
 ~~~ java
     HashMap<String, Integer> hm2 = Encryption.decrypt(so, secretKey);
 ~~~
+
+###Compression and Decompression
+In order to use compression and decompression, the following class should be imported:
+~~~ java
+import com.ibm.storage.clientlibrary.Util;
+~~~
+
+The following method call compresses “hm”: 
+~~~ java
+    byte[] compressed = Util.compress(hm);
+~~~
+
+The following method call decompresses “compressed”: 
+~~~ java
+    HashMap<String, Integer> hm2 = Util.decompress(compressed);
+~~~
