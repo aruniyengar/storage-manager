@@ -18,6 +18,10 @@ import java.util.Scanner;
  */
 
 public class Util {
+    
+    private final static String SEPARATOR = "#"; // to separate comments from input values 
+                                                 // in input files
+
     /**
      * Perform an unchecked cast while suppressing warnings
      * 
@@ -142,5 +146,50 @@ public class Util {
           return Constants.CONFIG_DIRECTORY + File.separator + storeId + Constants.CONFIG_FILE_SUFFIX;
       }
 
-      
+      /**
+       * Print a message and throw an exception
+       * 
+       * @param message
+       *            message to print
+       * 
+       * */
+      public static void throwException(String message) throws Exception {
+          System.out.println(message);
+          throw new Exception();
+      }
+
+      /**
+       * read next input string
+       * 
+       * @param scan
+       *            Scanner corresponding to input
+       * 
+       * @return next input string
+       * 
+       * */
+      public static String getNextInput(Scanner scan) {
+          String word = scan.nextLine();
+          String word2 = (word.split(SEPARATOR)[0]);
+          return word2.trim();
+      }    
+
+      /**
+       * Read in a positive integer, which may come from a configuration file
+       * 
+       * @param message
+       *            output message if read fails
+       * @param input
+       *            scanner corresponding to input
+       *            
+       * @return positive integer read in
+       * 
+       * */
+      public static int readPositiveInt (String message, Scanner input) throws Exception {
+          int value = Integer.parseInt(getNextInput(input));
+          if (value < 1) {
+              throwException("Error.  Illegal configuration parameter: " + message + ": " + value);
+          }
+          return value;
+      }
+
 }

@@ -5,13 +5,15 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import com.ibm.storage.storagemanager.implementations.guava.KeyValueGuava;
+import com.ibm.storage.storagemanager.interfaces.KeyValue;
+
 
 public class GuavaTests {
 
     int numObjects = 2000;
-    KeyValueGuava<String, Integer> datastore = new KeyValueGuava<String, Integer>(numObjects);
+    KeyValue<String, Integer> datastore = new KeyValueGuava<String, Integer>(numObjects);
     
-    KeyValueGuava<String, HashMap<String, Integer>> datastore2 = new KeyValueGuava<String, HashMap<String, Integer>>(numObjects);
+    KeyValue<String, HashMap<String, Integer>> datastore2 = new KeyValueGuava<String, HashMap<String, Integer>>(numObjects);
     
     @Test
     public void testPut() {

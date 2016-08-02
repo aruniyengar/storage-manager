@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import com.ibm.storage.storagemanager.implementations.cloudant.KeyValueCloudant;
+import com.ibm.storage.storagemanager.interfaces.KeyValue;
 import com.ibm.storage.storagemanager.util.Constants;
 import com.ibm.storage.storagemanager.util.Util;
 
@@ -13,10 +14,10 @@ public class CloudantTests {
     // File with cloudant URL, username, and password should be entered here
     private static final String CONFIG_FILE = Util.configFile(Constants.CLOUDANT);
     
-    KeyValueCloudant<String, Integer> datastore = new KeyValueCloudant<String, Integer>("db1",
+    KeyValue<String, Integer> datastore = new KeyValueCloudant<String, Integer>("db1",
             CONFIG_FILE, true);
     
-    KeyValueCloudant<String, HashMap<String, Integer>> datastore2 = 
+    KeyValue<String, HashMap<String, Integer>> datastore2 = 
             new KeyValueCloudant<String, HashMap<String, Integer>>("db1", CONFIG_FILE, true);
 
     @Test

@@ -103,7 +103,7 @@ public class PerformanceTester {
             objects = getTestData();
             break;
         default:
-            exitWithMessage("Error in PerformanceTester constructor: illegal option for creating data: " + dataType);
+            Util.throwException("Error in PerformanceTester constructor: illegal option for creating data: " + dataType);
         }
         testCache();
         testCompression();
@@ -173,7 +173,7 @@ public class PerformanceTester {
                 byte[] returnVal = dataStore.get(KEY_ROOT + index);
                 endTime = System.nanoTime();
                 if (returnVal.length != objects[index].length) {
-                    exitWithMessage("Error in PerformanceTester.timeRequest.  Returned object of length "
+                    Util.throwException("Error in PerformanceTester.timeRequest.  Returned object of length "
                             + returnVal.length + " does not match expected length: " + objects[index].length);
                 }
                 break;
@@ -203,7 +203,7 @@ public class PerformanceTester {
                 endTime = System.nanoTime();           
                 break;
             default:
-                exitWithMessage("Error in PerformanceTester.timeRequest: illegal Operation: " + operation);
+                Util.throwException("Error in PerformanceTester.timeRequest: illegal Operation: " + operation);
        }
         return endTime - startTime;
     }
@@ -218,7 +218,7 @@ public class PerformanceTester {
             byte[] returnVal = dataStore.get("adfj");
             double endTime = System.nanoTime();
             if (returnVal != null) {
-                exitWithMessage("Error in PerformanceTester.missTime.  Object should not be in data store. "
+                Util.throwException("Error in PerformanceTester.missTime.  Object should not be in data store. "
                         + " Length of returned object is: " + returnVal.length);
             }
             totalTime += (endTime - startTime);
@@ -226,29 +226,10 @@ public class PerformanceTester {
         return totalTime/runs;
     }
     
-    private static String getNextInput(Scanner scan) {
-        String word = scan.nextLine();
-        String word2 = (word.split(SEPARATOR)[0]);
-        return word2.trim();
-    }    
-    
-    private static void exitWithMessage(String message) throws Exception {
-        System.out.println(message);
-        throw new Exception();
-    }
-    
-    private static int readValue (String message, Scanner input) throws Exception {
-        int value = Integer.parseInt(getNextInput(input));
-        if (value < 1) {
-            exitWithMessage("Error.  Illegal configuration parameter: " + message + ": " + value);
-        }
-        return value;
-    }
-
     private static double readDivisor (Scanner input) throws Exception {
-        double value = Double.parseDouble(getNextInput(input));
+        double value = Double.parseDouble(Util.getNextInput(input));
         if (value <= 0.0) {
-            exitWithMessage("Error.  Illegal scaling divisor: " + value);
+            Util.throwException("Error.  Illegal scaling divisor: " + value);
         }
         return value;
     }
@@ -264,28 +245,28 @@ public class PerformanceTester {
                     configFile + " not found.  Exiting.");
             System.exit(1);
         }
-        outputDirectory = getNextInput(input);
+        outputDirectory = Util.getNextInput(input);
         if (outputDirectory.charAt(outputDirectory.length() - 1) != (File.separatorChar)) {
             outputDirectory += File.separatorChar;
         }
-        maxObjectSize = readValue("maximum object size", input);
-        objectSizes = readValue("# of object sizes", input);
+        maxObjectSize = Util.readPositiveInt("maximum object size", input);
+        objectSizes = Util.readPositiveInt("# of object sizes", input);
         if (objectSizes > maxObjectSize) {
             objectSizes = maxObjectSize;
         }
-        hitRates = Integer.parseInt(getNextInput(input));
+        hitRates = Integer.parseInt(Util.getNextInput(input));
         if (hitRates < 2) {
-            exitWithMessage("Error.  Illegal number of hit rates: " + hitRates);
+            Util.throwException("Error.  Illegal number of hit rates: " + hitRates);
             
         }
-        int useRemoteProcessCache = Integer.parseInt(getNextInput(input));
+        int useRemoteProcessCache = Integer.parseInt(Util.getNextInput(input));
         if (useRemoteProcessCache == 1) {
             useRemoteCache = true;
         }
-        runs = readValue("# of test runs per data point", input);
+        runs = Util.readPositiveInt("# of test runs per data point", input);
         sizeDivisor = readDivisor(input);
         latencyDivisor = readDivisor(input);
-        int type = Integer.parseInt(getNextInput(input));
+        int type = Integer.parseInt(Util.getNextInput(input));
         switch (type) {
             case 0:
                 dataType = DataGenerator.ZERO;
@@ -297,12 +278,12 @@ public class PerformanceTester {
                 dataType = DataGenerator.FILE;
                 break;
             default:
-                exitWithMessage("Configuration parameter error: illegal parameter"
+                Util.throwException("Configuration parameter error: illegal parameter"
                         + " specifying how to generate data (shoud be 1 or 2): " + type);
                 break;
         }
         if (dataType == DataGenerator.FILE) {
-            inputFile = getNextInput(input);
+            inputFile = Util.getNextInput(input);
         }
     }
     
@@ -330,7 +311,7 @@ public class PerformanceTester {
                 objects[i] = new byte[numBytes];
                 int bytesRead = inputStream.read(objects[i]);
                 if (bytesRead < numBytes) {
-                    exitWithMessage("Error in PerformanceTester.objectsFile: ran out of data for object "
+                    Util.throwException("Error in PerformanceTester.objectsFile: ran out of data for object "
                             + i);
                 }
             }
@@ -378,7 +359,7 @@ public class PerformanceTester {
      * @param configFile
      *            file storing configuration parameters
      * @param dataStores
-     *            Array containg all data stores to test
+     *            Array containing all data stores to test
      */
     public static void runAllTests(String configFile, ArrayList<KeyValue<String, byte[]>> dataStores) throws Exception {
         PerformanceTester pt = new PerformanceTester(configFile);
@@ -402,8 +383,8 @@ public class PerformanceTester {
                 decompressionTimes, "# 1st column: object sizes.  2nd column: " + "compression latencies."
                         + "  3rd column: decompression latencies" + LINE_SEPARATOR);
         outputTimePairs(Paths.get(outputDirectory + FILENAME_ENCRYPTION), encryptionTimes,
-                decryptionTimes, "# 1st column: object sizes.  2nd column: " + "compression latencies.  "
-                        + "3rd column: decompression latencies" + LINE_SEPARATOR);
+                decryptionTimes, "# 1st column: object sizes.  2nd column: " + "encryption latencies.  "
+                        + "3rd column: decryption latencies" + LINE_SEPARATOR);
     }
     
     private static void deleteDirectory(String directory) {
@@ -426,7 +407,8 @@ public class PerformanceTester {
             double cacheMissTime) throws Exception {
         try (BufferedWriter writer = Files.newBufferedWriter(path, CHARSET)) {
             writer.write("# 1st column: object sizes.  remaining columns: latencies, hit rate multiples of "
-                    + (double)   1 / (hitRates - 1) + " start hit rate: 0, end hit rate 1" + LINE_SEPARATOR);
+                    + (double)   1 / (hitRates - 1) + " start hit rate: 0, end hit rate 1, "
+                    + runs + " data points" + LINE_SEPARATOR);
             writeDivisors(writer);
             for (int i = 0; i < objectSizes; i++) {
                 String formatStr = "%f";
@@ -465,8 +447,8 @@ public class PerformanceTester {
         double[] readTimes = runTests(dataStore, Operations.READ);
         String filePrefix = outputDirectory + dataStore.storeType();
         outputTimePairs(Paths.get(filePrefix+ FILENAME_SUFFIX_NO_CACHE), readTimes, writeTimes, "# 1st column: object sizes.  2nd column: " +
-                "read latencies without caching.  3rd column: write latencies without caching" +
-                LINE_SEPARATOR);
+                "read latencies without caching.  3rd column: write latencies without caching, "
+                + runs + " data points" + LINE_SEPARATOR);
         outputDataWithCache(createFile(filePrefix + FILENAME_SUFFIX_FAST_CACHE), readTimes,
                 fastCacheHitTimes, fastCacheMissTime);
         if (useRemoteCache) {

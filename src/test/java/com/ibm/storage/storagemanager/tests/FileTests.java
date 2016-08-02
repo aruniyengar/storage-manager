@@ -5,13 +5,15 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import com.ibm.storage.storagemanager.implementations.file.KeyValueFile;
+import com.ibm.storage.storagemanager.interfaces.KeyValue;
+
 
 public class FileTests {
     
     
-    KeyValueFile<String, Integer> datastore = new KeyValueFile<String, Integer>("db1", true);
+    KeyValue<String, Integer> datastore = new KeyValueFile<String, Integer>("db1", true);
     
-    KeyValueFile<String, HashMap<String, Integer>> datastore2 = 
+    KeyValue<String, HashMap<String, Integer>> datastore2 = 
             new KeyValueFile<String, HashMap<String, Integer>>("db1", true);
 
     @Test

@@ -5,12 +5,14 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import com.ibm.storage.storagemanager.implementations.redis.KeyValueRedis;
+import com.ibm.storage.storagemanager.interfaces.KeyValue;
+
 
 public class RedisTests {
 
-    KeyValueRedis<String, Integer> datastore = new KeyValueRedis<String, Integer>("localhost", 6379, 60);
+    KeyValue<String, Integer> datastore = new KeyValueRedis<String, Integer>("localhost", 6379, 60);
     
-    KeyValueRedis<String, HashMap<String, Integer>> datastore2 = 
+    KeyValue<String, HashMap<String, Integer>> datastore2 = 
             new KeyValueRedis<String, HashMap<String, Integer>>("localhost", 6379, 60);
 
 

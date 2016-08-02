@@ -90,8 +90,7 @@ public class MonitoredKeyValue<K,V> implements KeyValueMonitored<K, V> {
         stats.recordRequest(endTime - startTime, RequestType.CLEAR);
         return returnVal;
     }
-
-    
+  
     /**
      * delete a key-value pair
      * 
@@ -128,7 +127,6 @@ public class MonitoredKeyValue<K,V> implements KeyValueMonitored<K, V> {
         return returnVal;      
     }
 
-
     /**
      * look up a value
      * 
@@ -145,7 +143,6 @@ public class MonitoredKeyValue<K,V> implements KeyValueMonitored<K, V> {
         stats.recordRequest(endTime - startTime, RequestType.GET);
         return returnVal;      
     }
-
 
     /**
      * look up one or more values.
@@ -164,7 +161,6 @@ public class MonitoredKeyValue<K,V> implements KeyValueMonitored<K, V> {
         return returnVal;      
     }
 
-
     /**
      * Return a string idenfitying the type of storage service
      * 
@@ -178,7 +174,6 @@ public class MonitoredKeyValue<K,V> implements KeyValueMonitored<K, V> {
         stats.recordRequest(endTime - startTime, RequestType.STORETYPE);
         return returnVal;      
     }
-
     
     /**
      * store a key-value pair
@@ -200,7 +195,6 @@ public class MonitoredKeyValue<K,V> implements KeyValueMonitored<K, V> {
         return returnVal;      
     }
 
-
     /**
      * store one or more key-value pairs
      * 
@@ -219,7 +213,6 @@ public class MonitoredKeyValue<K,V> implements KeyValueMonitored<K, V> {
         return returnVal;      
     }
 
-
     /**
      * Return number of stored objects
      * 
@@ -233,7 +226,6 @@ public class MonitoredKeyValue<K,V> implements KeyValueMonitored<K, V> {
         stats.recordRequest(endTime - startTime, RequestType.SIZE);
         return returnVal;      
     }
-
     
     /**
      * Output contents of current database to a string.
@@ -250,7 +242,7 @@ public class MonitoredKeyValue<K,V> implements KeyValueMonitored<K, V> {
         return returnVal;      
     }
 
-    
+
     public static void testUpdate(MonitoredKeyValue<String, Integer> datastore) {
         
         String key1 = "key1";
@@ -305,7 +297,7 @@ public class MonitoredKeyValue<K,V> implements KeyValueMonitored<K, V> {
      */
     public static void main(String[] args) {
         String configFile = Util.configFile(Constants.CLOUDANT);
-        KeyValueCloudant<String, Integer> datastore = new KeyValueCloudant<String, Integer>("db1",
+        KeyValue<String, Integer> datastore = new KeyValueCloudant<String, Integer>("db1",
                 configFile, true);
         MonitoredKeyValue<String, Integer> ds1 = new MonitoredKeyValue<String, Integer>(datastore, 10);
         testUpdate(ds1);

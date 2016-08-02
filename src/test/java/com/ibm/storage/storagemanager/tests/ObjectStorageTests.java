@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import com.ibm.storage.storagemanager.implementations.objectstorage.KeyValueObjectStorage;
+import com.ibm.storage.storagemanager.interfaces.KeyValue;
 import com.ibm.storage.storagemanager.util.Constants;
 import com.ibm.storage.storagemanager.util.Util;
 
@@ -13,10 +14,10 @@ public class ObjectStorageTests {
     // File with object storage URL, username, and password should be entered here
     private static final String CONFIG_FILE =  Util.configFile(Constants.OBJECTSTORAGE);
     
-    KeyValueObjectStorage<String, Integer> datastore = new KeyValueObjectStorage<String, Integer>("db1",
+    KeyValue<String, Integer> datastore = new KeyValueObjectStorage<String, Integer>("db1",
             CONFIG_FILE, true);
     
-    KeyValueObjectStorage<String, HashMap<String, Integer>> datastore2 = 
+    KeyValue<String, HashMap<String, Integer>> datastore2 = 
             new KeyValueObjectStorage<String, HashMap<String, Integer>>("db1", CONFIG_FILE, true);
 
     @Test

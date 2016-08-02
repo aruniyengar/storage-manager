@@ -8,6 +8,8 @@ import com.ibm.storage.storagemanager.implementations.cloudant.KeyValueCloudant;
 import com.ibm.storage.storagemanager.implementations.monitor.MonitoredKeyValue;
 import com.ibm.storage.storagemanager.implementations.monitor.RequestStats;
 import com.ibm.storage.storagemanager.implementations.monitor.StorageStats;
+import com.ibm.storage.storagemanager.interfaces.KeyValue;
+
 import com.ibm.storage.storagemanager.util.Constants;
 import com.ibm.storage.storagemanager.util.Util;
 import com.ibm.storage.storagemanager.util.Constants.RequestType;
@@ -17,7 +19,7 @@ public class MonitoredTests {
     // File with cloudant URL, username, and password should be entered here
     private static final String CONFIG_FILE =  Util.configFile(Constants.CLOUDANT);
     
-    KeyValueCloudant<String, Integer> datastore2 = new KeyValueCloudant<String, Integer>("db1",
+    KeyValue<String, Integer> datastore2 = new KeyValueCloudant<String, Integer>("db1",
             CONFIG_FILE, true);
 
     MonitoredKeyValue<String, Integer> datastore = new MonitoredKeyValue<String, Integer>(datastore2, 10);
