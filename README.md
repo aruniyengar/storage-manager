@@ -163,6 +163,25 @@ The following displays the contents of the entire data store.  It should not be 
 ~~~ java
     System.out.println(datastore.toString());
 ~~~
+
+###Asynchronous (non-blocking) Access to Data Stores
+In the previous examples, each method call to access a data store blocks until the data store returns a response. In some cases, it is desirable for an application to access a data store and continue execution without waiting for a response from the data store.
+The following creates an object which is used to make asynchronous (non-blocking) calls to a data store; "datastore" is of type KeyValue (which includes any implementation of the KeyValue interface):
+~~~ java
+import com.ibm.storage.storagemanager.implementations.async.AsyncKeyValue;
+    KeyValueAsync<String, Integer> datastoreAsync = new AsyncKeyValue<String, Integer>(datastore);
+~~~
+
+The following is used to store a key-value pair in datastoreAsync asynchronously:
+~~~ java
+import com.google.common.util.concurrent.ListenableFuture;
+import com.ibm.storage.storagemanager.interfaces.KeyValue.ReturnStatus;
+	ListenableFuture<ReturnStatus> listenableFuture = datastoreAsync.putAsync(key2, 43);
+~~~
+In this example, listenableFuture is a [ListenableFuture](http://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/util/concurrent/ListenableFuture.html). ListenableFutures extend the Java Future class by allowing callback functions to be defined which are executed after the computation corresponding to the ListenableFuture has finished executing. More information about ListenableFutures is available [here](https://github.com/google/guava/wiki/ListenableFutureExplained). Other asynchronous (nonblocking) calls to data stores are defined in https://github.com/aruniyengar/storage-manager/blob/master/src/main/java/com/ibm/storage/storagemanager/implementations/async/AsyncKeyValue.java.
+
+
+
 ###Monitoring Data Store Performance
 The following creates an object which is used to monitor data stores; "datastore" is of type KeyValue (which includes any implementation of the KeyValue interface):
 ~~~ java
