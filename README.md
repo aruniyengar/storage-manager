@@ -169,6 +169,7 @@ In the previous examples, each method call to access a data store blocks until t
 The following creates an object which is used to make asynchronous (non-blocking) calls to a data store; "datastore" is of type KeyValue (which includes any implementation of the KeyValue interface):
 ~~~ java
 import com.ibm.storage.storagemanager.implementations.async.AsyncKeyValue;
+import com.ibm.storage.storagemanager.interfaces.KeyValueAsync;
     KeyValueAsync<String, Integer> datastoreAsync = new AsyncKeyValue<String, Integer>(datastore);
 ~~~
 
