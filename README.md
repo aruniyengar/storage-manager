@@ -179,7 +179,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.ibm.storage.storagemanager.interfaces.KeyValue.ReturnStatus;
 	ListenableFuture<ReturnStatus> listenableFuture = datastoreAsync.putAsync(key2, 43);
 ~~~
-In this example, listenableFuture is a [ListenableFuture](http://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/util/concurrent/ListenableFuture.html). ListenableFutures extend the Java Future class by allowing callback functions to be defined which are executed after the computation corresponding to the ListenableFuture has finished executing. More information about ListenableFutures is available [here](https://github.com/google/guava/wiki/ListenableFutureExplained). Other asynchronous (nonblocking) calls to data stores are defined in https://github.com/aruniyengar/storage-manager/blob/master/src/main/java/com/ibm/storage/storagemanager/implementations/async/AsyncKeyValue.java.
+In this example, listenableFuture is a [ListenableFuture](http://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/util/concurrent/ListenableFuture.html). ListenableFutures extend the Java Future interface by allowing callback functions to be defined which are executed after the computation corresponding to the ListenableFuture has finished executing. More information about ListenableFutures is available [here](https://github.com/google/guava/wiki/ListenableFutureExplained). Other asynchronous (nonblocking) calls to data stores are defined in https://github.com/aruniyengar/storage-manager/blob/master/src/main/java/com/ibm/storage/storagemanager/implementations/async/AsyncKeyValue.java.
 
 
 
